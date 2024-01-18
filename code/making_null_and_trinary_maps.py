@@ -65,6 +65,7 @@ for embryo_mask in embryo_masks:
 #%%
 import random
 inpath = "C:/Users/ebjam/Documents/GitHub/spore_embryo_unet/images/inputs/resized320/"
+annopath = ""
 all_images = [q for q in os.listdir(inpath) if q.endswith("png")]
 
 random.shuffle(all_images)
@@ -81,4 +82,18 @@ for image in test:
 for image in train:
     src = os.path.join(inpath, image)
     dst = os.path.join(trainpath, image)
+    os.rename(src, dst)
+#%%
+annopath = "C:/Users/ebjam/Documents/GitHub/spore_embryo_unet/images/trinary_segmentation/resized320/"
+annotestpath = os.path.join(annopath, "test/")
+annotrainpath = os.path.join(annopath, "train/")
+os.makedirs(annotestpath, exist_ok=True)
+os.makedirs(annotrainpath, exist_ok=True)
+for image in test:
+    src = os.path.join(annopath, image)
+    dst = os.path.join(annotestpath, image)
+    os.rename(src, dst)
+for image in train:
+    src = os.path.join(annopath, image)
+    dst = os.path.join(annotrainpath, image)
     os.rename(src, dst)
